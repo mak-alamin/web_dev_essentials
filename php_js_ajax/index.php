@@ -19,11 +19,12 @@
 
     <h3>Add Name</h3>
     <form action="" method="post">
+        <p id="msg"></p>
         <label for="Your Name">Your Name</label>
-        <input type="text">
+        <input type="text" name="your_name" id="your_name">
         <br><br>
 
-        <input type="submit" value="Save" name="save">
+        <input type="submit" value="Save" id="save" name="save">
     </form>
 
     <script src="ajax.js"></script>

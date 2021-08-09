@@ -1,5 +1,4 @@
 const suggetions = document.getElementById("suggetions");
-let sugg_span = '';
 
 function showName(str){
     str = str.toLowerCase();
@@ -19,19 +18,11 @@ function showName(str){
 
             users.forEach((user, i) => {
                str_inc = user.name.toLowerCase().includes(str);
-               console.log(str_inc);
     
                 if(str_inc){
                     suggetions.innerHTML += ' <span>' + user.name + '</span>';
                 }
-            });
-
-            sugg_span = document.querySelector("#suggetions span");
-
-            sugg_span.addEventListener('click', function(e){
-                console.log(e.innerText);
-            });
-            
+            });   
         }
        
         xmlhttp.open("GET", "ajax.php?q=" + str);
@@ -42,3 +33,36 @@ function showName(str){
 function clearSuggestion(){
     suggetions.innerHTML = '';
 }
+
+
+//Post Data
+var msg = document.getElementById("msg");
+var save_name = document.getElementById("save");
+
+save_name.addEventListener('click', function(e){
+    e.preventDefault();
+    
+    var your_name = document.getElementById("your_name").value;
+
+    const xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.open("POST", "ajax.php", true);
+      
+    xmlhttp.onload = function(){
+        if (this.readyState == 4 && this.status == 200){
+
+            let response = this.responseText;
+            
+            if(response == 1){
+                msg.innerHTML = 'Data Inserted Successfully!';
+            } else {
+                msg.innerHTML = 'Something went wrong!';
+            }
+        
+        }
+    }
+    var data = {
+        name: your_name,
+    }
+    xmlhttp.send(JSON.stringify(data));
+});

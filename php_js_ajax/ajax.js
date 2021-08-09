@@ -1,15 +1,15 @@
 const suggetions = document.getElementById("suggetions");
-// var sugg_arr = [];
-var sugg_str = '';
+let sugg_span = '';
 
 function showName(str){
     str = str.toLowerCase();
 
     if(str.length == 0) {
-        // sugg_arr = [];
-        sugg_str = '';
+     
+        suggetions.innerHTML = '';
+
     } else {
-       
+
         const xmlhttp = new XMLHttpRequest();
       
         xmlhttp.onload = function(){
@@ -19,23 +19,26 @@ function showName(str){
 
             users.forEach((user, i) => {
                str_inc = user.name.toLowerCase().includes(str);
+               console.log(str_inc);
     
                 if(str_inc){
-                    sugg_str += '<span>' + user.name + '</span>';
-                } else {
-                    sugg_str = '';
+                    suggetions.innerHTML += ' <span>' + user.name + '</span>';
                 }
-
             });
+
+            sugg_span = document.querySelector("#suggetions span");
+
+            sugg_span.addEventListener('click', function(e){
+                console.log(e.innerText);
+            });
+            
         }
        
         xmlhttp.open("GET", "ajax.php?q=" + str);
         xmlhttp.send();
     }
+}
 
-    
-    // sugg_str = sugg_arr.toString();
-    console.log(sugg_str);
-
-    suggetions.innerHTML = sugg_str;
+function clearSuggestion(){
+    suggetions.innerHTML = '';
 }

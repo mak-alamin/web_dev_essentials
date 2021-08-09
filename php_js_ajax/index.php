@@ -11,7 +11,7 @@
 <body>
     <h3>Search Name</h3>
     <form action="" method="get">
-        <input type="text" name="search" id="search" onkeyup="showName(this.value)" autocomplete="off">
+        <input type="text" name="search" id="search" onkeyup="showName(this.value)" onkeydown="clearSuggestion()" autocomplete="off">
         <p>Suggetions: <strong id="suggetions"></strong></p>
     </form>
 
